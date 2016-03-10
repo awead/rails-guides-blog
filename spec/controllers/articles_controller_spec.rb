@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ArticlesController, type: :controller do
 
   subject { response }
-  let(:article) { Article.create!(title: "Sample article") }
+  let(:article) { create(:article) }
 
   describe "#new" do
     before { get :new }
@@ -51,7 +51,7 @@ RSpec.describe ArticlesController, type: :controller do
   end
 
   describe "#destroy" do
-    let!(:article) { Article.create!(title: "Sample article") }
+    let!(:article) { create(:article) }
     it "deletes an article" do
      expect{ 
         delete :destroy, id: article

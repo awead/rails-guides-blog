@@ -1,17 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  let(:article) { Article.create(title: "Sample title") }
+  let(:article) { create(:article_with_comment) }
 
   describe "#create" do
-    let(:comment) { Comment.create(commenter: "me", body: "a comment", article: article) }
+    subject { article.comments.first }
     it "adds a new comment to an article" do
-      expect(comment.commenter).to eq("me")
-      expect(comment.body).to eq("a comment")
-      expect(comment.article).to eq(article)
-    end
-    it "associates the article with the comment" do
-      expect(article.comments).to contain_exactly(comment)
+      expect(subject.commenter).to eq("Joe Schmoe")
+      expect(subject.body).to eq("Sample content of the comment")
+      expect(subject.article).to eq(article)
     end
   end
 

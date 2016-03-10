@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CommentsController, type: :controller do
 
-  let(:article) { Article.create(title: "An article") }
+  let(:article) { create(:article) }
 
   describe "#create" do
     it "adds a new comment to an article" do
@@ -13,7 +13,8 @@ RSpec.describe CommentsController, type: :controller do
   end
 
   describe "#destroy" do
-    let!(:comment) { Comment.create(commenter: "me", body: "the comment", article: article) }
+    let!(:article) { create(:article_with_comment) }
+    let(:comment) { article.comments.first }
     it "removes the comment from the article" do
       expect {
       	delete :destroy, article_id: article, id: comment
