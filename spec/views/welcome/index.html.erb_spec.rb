@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "welcome/index.html.erb", type: :view do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  before { render }
+  it "displays the welcome page" do
+    expect(rendered).to have_selector("h1", text: "Hello, Rails!")
+    expect(rendered).to have_link("My Blog")
+  end
+
 end
